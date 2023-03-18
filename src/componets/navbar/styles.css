@@ -25,3 +25,9 @@
 .dropdown-menu.show {
 	display: block;
 }
+
+#cartDisplayer {
+	scrollbar-width: thin; 
+	scrollbar-color: rgb(15 23 42) white;
+	margin-block: 10px;
+}

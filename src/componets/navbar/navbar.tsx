@@ -3,6 +3,7 @@ import './styles.css'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../app/store'
+import CartDisplay from '../display/cartDisplay'
 
 export default function Navbar() {
 		const [isOpen, setIsOpen] = useState(false)
@@ -45,23 +46,24 @@ function MyCartStatus(){
 			<div className='w-8 h-8 bg-white rounded-full flex justify-center items-center font-bold'>{cart.cartProducts.length}</div>
 			<div>🛒</div>
 		</div>
-		<MyCart isShowing={show} />
+		<MyCart isShowing={show} onClick={onClick}/>
 		</>
 	)
 }
 
 interface props {
 	isShowing: boolean
+	onClick: React.MouseEventHandler<HTMLDivElement>
 }
 function MyCart(props: props){
-	const {isShowing} = props
+	const {isShowing, onClick} = props
 	const cart = useSelector( (state: RootState) => state.cart)
 
 	return(
-			<div className={`fixed z-50 right-0 top-11 h-[calc(100%-2.75rem)] w-1/4 shadow-lg bg-white transition ease-in-out duration-500 origin-top-right ${ isShowing ? 'transform scale-x-100' : 'transform scale-x-0'} flex flex-col items-center`}>
-				<div className='bg-black w-full h-full mx-36 grid grid-cols-1 gap-4 overflow-y-auto'>
-					{cart.cartProducts.map( p => {
-						return <div className='text-white bg-fuchsia-500 m-4 rounded-lg flex justify-center items-center'>{p.id}</div>
+			<div className={`fixed z-50 right-2 top-11 h-[calc(100%-2.75rem)] w-1/4 shadow-lg bg-white transition ease-in-out duration-500 origin-top-right ${ isShowing ? 'transform scale-x-100' : 'transform scale-x-0'} flex flex-col items-center rounded-lg`} onMouseLeave={onClick}>
+				<div id='cartDisplayer' className='w-full h-full mx-36 grid grid-cols-1 gap-4 overflow-y-auto'>
+					{cart.cartProducts.map( product => {
+						return <CartDisplay key={product.id} id={product.id} title={product.title} image={product.image} quantity={product.quantity} price={product.price}/>
 					})}
 				</div>
 				<div className='bg-pink-300 h-20 flex justify-center items-center'>PAGAR</div>

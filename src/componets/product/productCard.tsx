@@ -1,7 +1,7 @@
 import { product } from "../../features/products/productsSlice" 
 import CartButton from "../buttons/cartButton"
 
-export default function ProductCard({ id, title, price, description, category, image, rating }:product) {
+export default function ProductCard({ id, title, price, image, rating }:product) {
 		return (
 			<div id='product' className="w-auto h-auto rounded-lg flex flex-col justify-evenly py-4 hover:shadow-2xl">
 					<div className="flex flex-row justify-evenly items-center">

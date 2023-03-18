@@ -19,7 +19,7 @@ export default function DisplayProducts( prop : {filter?:string}){
 		const filter = prop.filter
 
 		return(
-				<main className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-10 py-14">
+				<main className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 px-10">
 						{
 								products.isLoading ? <DisplayLoading/> :
 								products.productsList.map( product => {

@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { product } from "../products/productsSlice"
 
 export interface cartProduct {
     id: number
@@ -22,7 +21,15 @@ export const cartSlice = createSlice({
     initialState,
     reducers: {
         addToCart: (state, action) => {
-            state.cartProducts.push(action.payload)
+            if(state.cartProducts.length > 0){
+                const inCart = state.cartProducts.filter( product => product.id === action.payload.id)
+                if(inCart.length == 0){
+                    state.cartProducts.push(action.payload)
+                }
+            }
+            else{
+                state.cartProducts.push(action.payload)
+            }
         }
     }
 })

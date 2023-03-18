@@ -1,4 +1,5 @@
 import { product } from "../../features/products/productsSlice" 
+import CartButton from "../buttons/cartButton"
 
 export default function ProductCard({ id, title, price, description, category, image, rating }:product) {
 		return (
@@ -8,13 +9,10 @@ export default function ProductCard({ id, title, price, description, category, i
 						<span className=" font-semibold px-2">⭐{rating.rate}</span>
 					</div>
 					<img className='w-2/3 h-1/2 self-center object-contain' src={image} alt={`Image of the Product`} />					
-					<div className="w-2/3 self-center text-xl font-bold flex justify-between">Price: ${price} <CartButton/></div>
+					<div className="w-2/3 self-center text-xl font-bold flex justify-between">
+						Price: ${price}
+					 	<CartButton id={id} title={title} price={price} image={image}/>
+					 </div>
 			</div>
 		)
-}
-
-function CartButton() {
-	return(
-		<button>🛒</button>
-	)
 }

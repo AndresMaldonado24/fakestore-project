@@ -3,7 +3,7 @@ import { useSelector} from 'react-redux'
 import { RootState, useAppDispatch } from "../../app/store"
 import { fetchProducts } from "../../features/products/productsSlice"
 import DisplayLoading from "../loading/displayLoading"
-import ProductCard from "../product/productCard"
+import {ProductCard} from "../product/productCard"
 
 
 export default function DisplayProducts( prop : {filter?:string}){

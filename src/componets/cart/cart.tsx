@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
 import { RootState } from "../../app/store"
 import CartDisplay from "../display/cartDisplay"
 
@@ -25,7 +26,7 @@ export function MyCartStatus(){
 
 interface props {
 	isShowing: boolean
-	onClick: React.MouseEventHandler<HTMLDivElement>
+	onClick:  React.MouseEventHandler<HTMLButtonElement>,
 }
 export function MyCart(props: props){
 	const {isShowing, onClick} = props
@@ -35,7 +36,7 @@ export function MyCart(props: props){
     const VAT:number = (totalPrice * 0.19)
 
 	return(
-			<div className={`fixed z-50 right-2 top-11 h-[calc(100%-2.75rem)] w-1/4 shadow-lg bg-white transition ease-in-out duration-500 origin-top-right ${ isShowing ? 'transform scale-x-100' : 'transform scale-x-0'} flex flex-col items-center rounded-lg`} onMouseLeave={onClick}>
+			<div className={`fixed z-50 right-2 top-11 h-[calc(100%-2.75rem)] w-1/4 shadow-lg bg-white transition ease-in-out duration-500 origin-top-right ${ isShowing ? 'transform scale-x-100' : 'transform scale-x-0'} flex flex-col items-center rounded-lg`}>
 				<div id='cartDisplayer' className='w-full h-full mx-36 flex flex-col gap-4 overflow-y-auto'>
 					{cart.cartProducts.map( product => {
 						return <CartDisplay key={product.id} id={product.id} title={product.title} image={product.image} quantity={product.quantity} price={product.price}/>
@@ -48,7 +49,7 @@ export function MyCart(props: props){
                         <div className='flex justify-between'><p>Net Amount:</p><p>${(totalPrice + VAT).toFixed(2)}</p></div>
                     </div>
                     <div className="flex justify-center items-center">
-                        <button className="bg-green-400 rounded-lg p-4 text-white font-bold transition-transform ease-in-out duration-300 hover:shadow-lg">Checkout</button>
+                        <Link to='/checkout'><button className={`rounded-lg p-4 text-white font-bold transition-transform ease-in-out duration-300 hover:shadow-lg + ${cart.cartProducts.length ? 'bg-green-400' : 'bg-slate-500'}`} disabled={cart.cartProducts.length? false : true} onClick={onClick}>Checkout</button></Link>
                     </div>
                 </div>
 			</div>
